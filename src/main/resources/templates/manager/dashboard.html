@@ -58,6 +58,7 @@
       flex-direction: row;
       align-items: center;
       margin-bottom: 10px;
+
     }
 
     .board-transaction {
@@ -81,14 +82,16 @@
       height: 180px;
       background-color: #f9f9f9;
       margin: 10px;
+
     }
 
     .board-item-visitor {
       flex: 2;
-      height: 200px;
+      height: 360px;
       background-color: #f9f9f9;
       margin: 10px;
       display: flex;
+
     }
 
     /* 프로필 정보 스타일 */
@@ -150,6 +153,7 @@
     left: 0;
     width: 100%;
     height: 100%;
+    z-index:0;
   }
 
 
@@ -161,40 +165,39 @@
     <div class="container">
         <div class="sidebar">
             <ul>
-                <li class="dash"><a href="#">
+                <li class="dash">
                     <img src="/image/manager/dashboard.PNG" alt="dash">
                     대시보드
-                </a></li>
-                <li class="user-c"><a href="#">
+                </li>
+                <li class="user-c">
                     <img src="/image/manager/user.PNG" alt="user-c">
                     사용자 관리
-                </a></li>
-                <li class="content-c"><a href="#">
+                </li>
+                <li class="content-c">
                     <img src="/image/manager/content.PNG" alt="content-c">
                     컨텐츠 관리
-                </a></li>
+                </li>
                 <li class="marketing-c">
-                    <a href="#">
                         <img src="/image/manager/marketing.PNG" alt="marketing-c">
                         마케팅 관리
-                    </a>
                 </li>
-                <li class="revenue"><a href="#">
+                <li class="revenue">
                     <img src="/image/manager/sales.PNG" alt="revenue">
                     수입관리
-                </a></li>
-                <li class="stast"><a href="#">
+                </li>
+                <li class="stast">
                     <img src="/image/manager/statics.PNG" alt="stast">
                     통계
-                </a></li>
-                <li class="sup"><a href="#">
+                </li>
+                <li class="sup">
                     <img src="/image/manager/support.PNG" alt="sup">
                     고객지원
-                </a></li>
+                </li>
             </ul>
         </div>
 
         <!-- 컨텐츠 영역에 공간을 추가하려면 빈 div 추가 -->
+        <!--대시보드-->
         <div class="board-area dash-1 show">
 
             <div class="board-visitor">
@@ -206,7 +209,6 @@
             </div>
 
             <div class="board-transaction">
-                <div class="board-item">거래량</div>
                 <div class="board-item">일자별 요약</div>
             </div>
             <div class="board-Inquiry">
@@ -237,17 +239,17 @@
         </div>
         <!--고객지원-->
         <div class="board-area sup-1">
-            거갱지언
+            고객지원
         </div>
 
 
         <div class="profile-info">
             <div class="profile">
                 <img src="/image/manager.PNG" alt="프로필 사진">
-                <div class="nickname">운영진: 닉네임</div>
+                <div class="nickname">운영진: {name} 조민형</div>
             </div>
             <div class="total-sales">총 매출</div>
-            <div class="sales-amount">3000원</div>
+            <div class="sales-amount"><input style="width:80%; text-align:center;" placeholder="100,000,000￦" disabled/></div>
         </div>
     </div>
 

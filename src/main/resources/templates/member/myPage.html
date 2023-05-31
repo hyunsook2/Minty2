@@ -107,8 +107,72 @@
     .pay-m{
         align-items: center;
     }
-    </style>
 
+    //출금버튼
+    .sidebar {
+      border: 2px solid #000;
+      overflow: auto;
+      margin-left: auto;
+      margin-bottom: 20px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+     .sidebar ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    .sidebar ul li {
+      padding: 8px 12px;
+      margin: 10px;
+    }
+    .sidebar ul li:hover {
+      background-color: #eaeaea;
+    }
+
+    .sidebar ul li a {
+      display: block;
+      text-decoration: none;
+      color: #000;
+    }
+
+    .charge {
+        width: 180px;
+        height: 95px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        background-color: white;
+        border:2px solid black;
+    }
+    .charge img {
+        vertical-align: middle;
+        margin-right: 10px;
+    }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script th:inline="javascript">
+    function openNewWindow() {
+        var popupWidth = 900;
+        var popupHeight = 800;
+        var leftPosition = (window.screen.width - popupWidth) / 2;
+        var topPosition = (window.screen.height - popupHeight) / 2;
+
+        window.open(/*[[@{/charge}]]*/, '_blank', 'width=' + popupWidth + ', height=' + popupHeight + ', left=' + leftPosition + ', top=' + topPosition);
+    }
+
+      $(document).ready(function() {
+        $(".charge").on("mouseover", function() {
+            console.log("됨");
+            $(this).css("background-color", "rgba(128, 128, 128, 0.5)");
+        });
+
+        $(".charge").on("mouseout", function() {
+            $(this).css("background-color", "white");
+        });
+    });
+</script>
 </head>
 <body>
 <div layout:fragment="content">
@@ -132,30 +196,32 @@
                 <img src="/image/myPage/exp.PNG" alt="경험치 바">
             </div>
 
-                <div class="moneyView">
-                    <div>
-                        보유 포인트
-                    </div>
-                    <div>
-                        <input style="width:50%">
-                    </div>
-                    <div>
-                        보유 잔고
-                    </div>
-                    <div>
-                        <input style="width:50%">
-                    </div>
-                    <div class="pay">
-
-                                <div class="pay-m">
-                                    충전하기
-                          <br>
-                                    출금하기
-                                </div>
+            <div class="moneyView">
+                <div>
+                    보유 포인트
+                </div>
+                <div style="text-align: center;">
+                    <input style="width: 80%; text-align: center;" placeholder="10,000P" disabled/>
+                </div>
+                <div>
+                    보유 잔고
+                </div>
+                <div style="text-align: center;">
+                    <input style="width: 80%; text-align: center;" placeholder="50,000원" disabled/>
+                </div>
+                <div class="pay">
+                    <div class="pay-m">
+                        <div class="charge" onclick="openNewWindow()">
+                            <img src="/image/myPage/charge_in.png" alt="충전아이콘">
+                            <span>충전하기</span>
+                        </div>
+                        <div class="charge" onclick="openNewWindow()">
+                            <img src="/image/myPage/charge_out.png" alt="충전아이콘">
+                            <span>출금하기(미구현)</span>
+                        </div>
                     </div>
                 </div>
-
-
+            </div>
 
             <div class="attendance">
                 출석 영역
