@@ -3,6 +3,8 @@
 <th:block th:fragment="footer">
   <head>
     <style>
+    :root { scroll-behavior : auto }
+
   footer {
     background-color: #f2f2f2;
     padding: 3px;
@@ -33,19 +35,91 @@
   .footer-info p {
     margin: 0;
   }
-  .remote{
+.ad {
+    background: gray;
     position: fixed;
-    bottom: 155px;
-    right: 0;
-    transition: top 0.3s ease-in-out;
+    top: 120px;
+    left: 20px;
     z-index: 2;
-  }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
+    height: 650px;
+}
+
+.remote {
+  background: white;
+  position: fixed;
+  bottom: 155px;
+  right: 50px;
+  transition: all 0.5s ease-in-out;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.remote > div {
+  display: flex;
+  align-items: center;
+}
+
+.button {
+  flex: 1;
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  background-color: rgba(91, 194, 126, 0.5);
+  color: black;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.5s;
+  margin-right: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 120px;
+}
+
+.button:last-child {
+  margin-right: 0;
+}
+
+.button:hover {
+  color: white;
+  transform-origin: center;
+  background-color: rgba(91, 194, 126, 1);
+}
+
+.updown {
+  background: white !important;
+}
+
+
   </style>
   </head>
-  <div class="remote">
-    <button href="#">고객문의</button>
-    <button  href="#">글쓰기</button>
+  <!--광고배너-->
+  <div class="ad">
+    <img src="/image/imsy_ad.jpg" alt="임시광고" /></a>
   </div>
+
+  <!--리모컨(위아래 가기 글쓰기 등등)-->
+  <div class="remote">
+    <div>
+      <a class="button" th:href="@{sup}">고객문의</a>
+      <a class="button updown up"><img src="/image/up.png" alt="맨위로" /></a>
+    </div>
+    <div>
+      <a class="button" th:href="@{writeForm}">글쓰기</a>
+      <a class="button updown down"><img src="/image/down.png" alt="맨아래로" /></a>
+    </div>
+  </div>
+
+
   <footer class="footer">
     Team Reboot <br />
     주소 서울시 금천구 가산디지털2로 101 (가산동) 한라원앤원타워 B동 3층 (KOSMO)
@@ -58,17 +132,27 @@
         <br>
         고객센터
       </a>
-
       <a href="#">
         <img src="/image/ad.PNG" alt="로고 이미지" width="30px" height="30px" />
         <br>
         광고문의
       </a>
-
     </div>
     <div class="footer-info">
       <p>© 2023 Your Company. All rights reserved.</p>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+$(document).ready(function() {
+  $(".up").click(function() {
+    $("html, body").animate({ scrollTop: 0 }, 800);
+  });
+
+  $(".down").click(function() {
+    $("html, body").animate({ scrollTop: $(document).height() }, 800);
+  });
+});
+</script>
   </footer>
   </div>
 </th:block>

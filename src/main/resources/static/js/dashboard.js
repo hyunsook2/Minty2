@@ -28,6 +28,11 @@ $(".stast").on("click", function () {
   $(".stast-1").addClass("show");
 });
 
+$(".fix").on("click", function () {
+  $(".board-area").removeClass("show");
+  $(".fix-1").addClass("show");
+});
+
 $(".sup").on("click", function () {
   $(".board-area").removeClass("show");
   $(".sup-1").addClass("show");

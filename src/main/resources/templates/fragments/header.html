@@ -73,31 +73,7 @@
         display: block;
         clear: both;
       }
-      .tab-button {
-        display: block;
-        padding: 10px 20px 10px 20px;
-        float: left;
-        margin-right: -1px;
-        margin-bottom: -1px;
-        color: grey;
-        text-decoration: none;
-        cursor: pointer;
-      }
-      .orange {
-        border-top: 2px solid orange;
-        border-right: 1px solid #ccc;
-        border-bottom: 1px solid white;
-        border-left: 1px solid #ccc;
-        color: black;
-        margin-top: -2px;
-      }
-      .tab-content {
-        display: none;
-        padding: 10px;
-      }
-      .show {
-        display: block;
-      }
+
     .nav-link {
     font-family : 'font';
     }
@@ -112,7 +88,7 @@
     <div class="headerArea">
         <nav class="navbar navbar-dark" style="background:white;">
             <div class="container d-flex justify-content-between">
-                <a class="navbar-brand" href="#home">
+                <a class="navbar-brand" href="/">
                     <img src="/image/logo.PNG" alt="로고 이미지" width="110px"/>
                 </a>
                 <div class="navbar-nav me-md-auto d-flex flex-row gap-2">
@@ -131,19 +107,18 @@
                     <p></p>
                 </div>
                 <div class="navbar-nav d-flex flex-row gap-2">
-                    <a class="nav-link menu-a " href="#myShop">개인상점</a>
+                    <a class="nav-link menu-a " th:href="@{usershop}">개인상점</a>
                     <p></p>
                     <a class="nav-link menu-a " th:href="@{mypage}">마이페이지</a>
                     <p></p>
                     <a class="nav-link menu-a " th:href="@{manager}">관리자페이지</a>
                     <p></p>
-
+                    <a class="nav-link menu-a " th:href="@{join}">회원가입</a>
+                    <p></p>
                     <div sec:authorize="hasAnyRole('USER', 'ADMIN') or hasAnyAuthority('USER', 'ADMIN')">
                         <a class="nav-link menu-a login" th:href="logout">로그아웃</a>
                     </div>
-
                     <div sec:authorize="!isAuthenticated() or hasAuthority('REGISTER_USER')">
-
                         <a class="nav-link menu-a login" href="#login">로그인</a>
                     </div>
                 </div>
@@ -195,8 +170,8 @@
       });
 
       $(".black-bg").on('click', function(e) {
-         if ($(e.target).is('.black-bg')) {
-            $('.black-bg').removeClass('show-modal');
+         if($(e.target).is('.black-bg')) {
+           $('.black-bg').removeClass('show-modal');
          }
         });
 
@@ -206,7 +181,6 @@
             $(".menu-a")
                 .on("mouseover", function () {
                     $(this).css({
-
                         color: "#5bc27e",
                         "text-shadow": "1px 1px 1px aqua",
                         "transform-origin": "center",
