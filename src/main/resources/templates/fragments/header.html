@@ -119,12 +119,13 @@
                         <a class="nav-link menu-a login" th:href="logout">로그아웃</a>
                     </div>
                     <div sec:authorize="!isAuthenticated() or hasAuthority('REGISTER_USER')">
-                        <a class="nav-link menu-a login" href="#login">로그인</a>
+                        <a class="nav-link menu-a login" style="cursor: pointer;">로그인</a>
                     </div>
                 </div>
             </div>
         </nav>
     </div>
+    <div class="scroll-bar" style="top:110px; position: fixed; height: 5px; width: 0; background: black; z-index:10;"></div>
 
     <div class="black-bg">
         <div class="white-bg">
@@ -141,11 +142,11 @@
                     <div class="errorDiv">
                         <p th:if="${loginErrorMsg}" class="error" th:text="${loginErrorMsg}" style="color:red"></p>
                     </div>
-                    <a href="/oauth2/authorization/naver">
-                        <img src="../image/naverBtn.png" width="222" height="54.58" alt="네이버 로그인"/>
+                    <a href="/oauth2/authorization/naver" style="text-decoration: none;">
+                        <img src="../image/naverBtn.png" width="200" height="60" alt="네이버 로그인"/>
                     </a>
-                    <a href="/oauth2/authorization/kakao">
-                        <img src="../image/kakao_login_large_narrow.png" width="222" alt="카카오 로그인 버튼"/>
+                    <a href="/oauth2/authorization/kakao" style="text-decoration: none;">
+                        <img src="../image/kakao_login_large_narrow.png" width="200" height="60" alt="카카오 로그인 버튼"/>
                     </a>
                     <p id="token-result"></p>
                     <button class="btn btn-primary">로그인</button>
@@ -160,6 +161,17 @@
     <th:block layout:fragment="script">
         <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
         <script th:inline="javascript">
+        //스크롤바
+
+        $(window).on("scroll", function () {
+        var 스크롤양 = $(window).scrollTop();
+        var 문서높이 = $("html").height();
+        var 윈도우높이 = $(window).height();
+        var 스크롤바길이 = (스크롤양 / (문서높이 - 윈도우높이)) * 100;
+
+        $(".scroll-bar").css("width", `${스크롤바길이}%`);
+      });
+
       //로그인창
       $(".close").on("click", function () {
         $(".black-bg").removeClass("show-modal");

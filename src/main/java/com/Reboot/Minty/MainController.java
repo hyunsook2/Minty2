@@ -7,12 +7,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.net.http.HttpRequest;
-
 @Controller
-public class HomeController {
+public class MainController {
     @RequestMapping("/")
-    public String home(HttpServletRequest request){
+    public String main(HttpServletRequest request){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         HttpSession session = request.getSession();
         System.out.println(session.getAttribute("userEmail"));
@@ -20,7 +18,7 @@ public class HomeController {
             System.out.println(authentication.getPrincipal());
 
         }
-        return "home";
+        return "main";
     }
 
 

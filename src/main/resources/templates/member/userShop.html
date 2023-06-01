@@ -196,7 +196,6 @@
 
       $(document).ready(function() {
         $(".charge").on("mouseover", function() {
-            console.log("됨");
             $(this).css("background-color", "rgba(128, 128, 128, 0.5)");
         });
 
@@ -244,11 +243,11 @@
         <div class="pay">
           <div class="pay-m">
             <div class="charge" onclick="openNewWindow()">
-              <img src="/image/myPage/charge_in.png" alt="충전아이콘">
+              <img src="/image/myPage/charge_in.png" width="30px;" height="30px;" alt="충전아이콘">
               <span>충전하기</span>
             </div>
             <div class="charge" onclick="openNewWindow()">
-              <img src="/image/myPage/charge_out.png" alt="충전아이콘">
+              <img src="/image/myPage/charge_out.png" width="30px;" height="30px;"alt="충전아이콘">
               <span>출금하기(미구현)</span>
             </div>
           </div>

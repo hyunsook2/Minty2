@@ -134,7 +134,7 @@ public class PaymentController {
         return "pay/fail";
     }
 
-    //home.html 에서 충전하기 누르면 이동
+    //main.html 에서 충전하기 누르면 이동
     @GetMapping(value = "charge")
     public String charge(Model model) {
         model.addAttribute("clientKey", clientKey);

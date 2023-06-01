@@ -35,23 +35,28 @@
   .footer-info p {
     margin: 0;
   }
+
 .ad {
-    background: gray;
-    position: fixed;
-    top: 120px;
-    left: 20px;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 200px;
-    height: 650px;
+  background: white;
+  position: fixed;
+  top: 115px;
+  left: 0px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 250px;
+  height: 663px;
+}
+
+.ad img {
+  align-self: flex-end;
 }
 
 .remote {
-  background: white;
+  background: rgba(0, 0, 0, 0);
   position: fixed;
-  bottom: 155px;
+  bottom: 160px;
   right: 50px;
   transition: all 0.5s ease-in-out;
   z-index: 2;
@@ -96,7 +101,8 @@
 }
 
 .updown {
-  background: white !important;
+  background: rgba(0,0,0,0) !important;
+  cursor: pointer;
 }
 
 
@@ -104,18 +110,18 @@
   </head>
   <!--광고배너-->
   <div class="ad">
-    <img src="/image/imsy_ad.jpg" alt="임시광고" /></a>
+    <img src="/image/imsy_ad.jpg" alt="임시광고" style="height: 663px;"/></a>
   </div>
 
   <!--리모컨(위아래 가기 글쓰기 등등)-->
   <div class="remote">
     <div>
       <a class="button" th:href="@{sup}">고객문의</a>
-      <a class="button updown up"><img src="/image/up.png" alt="맨위로" /></a>
+      <a class="updown up"><img src="/image/up.png" alt="맨위로" /></a>
     </div>
     <div>
       <a class="button" th:href="@{writeForm}">글쓰기</a>
-      <a class="button updown down"><img src="/image/down.png" alt="맨아래로" /></a>
+      <a class="updown down"><img src="/image/down.png" alt="맨아래로" /></a>
     </div>
   </div>
 
@@ -143,15 +149,15 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-$(document).ready(function() {
-  $(".up").click(function() {
-    $("html, body").animate({ scrollTop: 0 }, 800);
-  });
+  $(document).ready(function() {
+    $(".up").click(function() {
+      $("html, body").animate({ scrollTop: 0 }, 800);
+    });
 
-  $(".down").click(function() {
-    $("html, body").animate({ scrollTop: $(document).height() }, 800);
+    $(".down").click(function() {
+      $("html, body").animate({ scrollTop: $(document).height() }, 800);
+    });
   });
-});
 </script>
   </footer>
   </div>
