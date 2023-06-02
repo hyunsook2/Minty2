@@ -110,7 +110,7 @@
   </head>
   <!--광고배너-->
   <div class="ad">
-    <img src="/image/imsy_ad.jpg" alt="임시광고" style="height: 663px;"/></a>
+    <img id="adImage" src="/image/imsy_ad.jpg" alt="임시광고" style="height: 663px;"/></a>
   </div>
 
   <!--리모컨(위아래 가기 글쓰기 등등)-->
@@ -158,6 +158,35 @@
       $("html, body").animate({ scrollTop: $(document).height() }, 800);
     });
   });
+
+    var images = [
+        "/image/ad/ff.png",
+        "/image/ad/haru.jpg",
+        "/image/ad/ba.jpg",
+        "/image/ad/maple.jpg",
+        "/image/ad/seri.jpg"
+
+        // 추가 이미지 경로들...
+    ];
+
+    function getRandomImage() {
+        var randomIndex = Math.floor(Math.random() * images.length);
+        return images[randomIndex];
+    }
+
+    function changeAdImage() {
+        var adImage = document.getElementById("adImage");
+        adImage.src = getRandomImage();
+    }
+
+    // 페이지 로드 시 초기 이미지 설정
+    changeAdImage();
+
+    // 페이지 새로고침 시 이미지 변경
+    window.addEventListener("beforeunload", function() {
+        changeAdImage();
+    });
+
 </script>
   </footer>
   </div>
