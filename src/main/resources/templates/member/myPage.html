@@ -150,6 +150,7 @@
         vertical-align: middle;
         margin-right: 10px;
     }
+
     </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script th:inline="javascript">
@@ -172,10 +173,118 @@
             $(this).css("background-color", "white");
         });
     });
+
+   $(document).ready(function() {
+                var token = $("meta[name='_csrf']").attr("content");
+                var header = $("meta[name='_csrf_header']").attr("content");
+                var today = moment().format('YYYY-MM-DD');
+
+                $('#calendar').fullCalendar({
+                    header: {
+                        left: '',
+                        center: 'title',
+                        right: ''
+                    },
+                    dayRender: function(date, cell) {
+                        var image = $('<img>', {
+                            class: 'attendance-image',
+                            src: '../image/myPage/check_x.png',
+                            click: function() {
+                                var clickedDate = moment(date).format('YYYY-MM-DD');
+
+                                if (clickedDate === 'favicon.ico') {
+                                    return;
+                                }
+
+                                if (clickedDate === today) {
+                                    var $image = $(this);
+
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: 'attendance/save',
+                                        contentType: 'application/json',
+                                        data: JSON.stringify({ date: clickedDate }),
+                                        success: function(response) {
+                                            $image.attr('src', '../image/myPage/check2.png');
+                                            // Update points display
+                                            updatePoints(response.points);
+                                        },
+                                        beforeSend: function(xhr) {
+                                            xhr.setRequestHeader(header, token);
+                                        },
+                                        error: function(error) {
+                                            console.log(error);
+                                        }
+                                    });
+                                } else {
+                                    console.log("출석체크는 당일만 가능합니다.");
+                                }
+                            }
+                        });
+
+                        var clickedDate = moment(date).format('YYYY-MM-DD');
+                        $.ajax({
+                            type: 'GET',
+                            url: 'attendance/checkStatus/' + clickedDate,
+                            success: function(response) {
+                                if (response) {
+                                    image.attr('src', '../image/myPage/check2.png');
+                                }
+                            },
+                            beforeSend: function(xhr) {
+                                xhr.setRequestHeader(header, token);
+                            },
+                            error: function(error) {
+                                console.log(error);
+                            }
+                        });
+
+                        $(cell).append(image);
+                    }
+                });
+
+                function updatePoints(points) {
+                    // Update the points display element with the new points value
+                    $('#points-display').text(points);
+                }
+            });
+
 </script>
+
+
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+    <style>
+        #calendar {
+            width: 550px;
+            margin: 0;
+            float: left;
+        }
+        .attendance-image {
+            width: 90%;
+            height: 90%;
+            margin-left: 3px;
+        }
+        .check-button {
+            display: inline-block;
+            margin-top: 5px;
+            cursor: pointer;
+            border: none;
+        }
+    </style>
+<!--    <th:block layout:fragment="script">-->
+<!--        <script src='https://fullcalendar.io/releases/fullcalendar/3.9.0/lib/moment.min.js'></script>-->
+<!--        <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css' rel='stylesheet'/>-->
+<!--        <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.print.css' rel='stylesheet' media='print'/>-->
+<!--        <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js'></script>-->
+<!--    </th:block>-->
+
 </head>
 <body>
 <div layout:fragment="content">
+
+
 
     <div class="container">
 
@@ -189,8 +298,8 @@
                         <div class="score">3.7</div>
                     </div>
                     <div class="information">
-                        <div class="nickname">Lv.10 닉네임</div>
-                        <div class="email">이메일</div>
+                        <div class="nickname">Lv. <span th:text="${Lv}"></span> <span th:text="${user.nickName}"></span></div>
+                        <div class="email"><span th:text="${user.email}"></span></div>
                     </div>
                 </div>
                 <img src="/image/myPage/exp.PNG" alt="경험치 바">
@@ -201,15 +310,19 @@
                     보유 포인트
                 </div>
                 <div style="text-align: center;">
-                    <input style="width: 80%; text-align: center;" placeholder="10,000P" disabled/>
+                    <div class="point" style="width: 80%; text-align: center;" >
+                        <span th:text="${user.point}"></span>
+                    </div>
                 </div>
                 <div>
                     보유 잔고
                 </div>
                 <div style="text-align: center;">
-                    <input style="width: 80%; text-align: center;" placeholder="50,000원" disabled/>
+                    <div class="balance" style="width: 80%; text-align: center;" >
+                        <span th:text="${user.balance}"></span>
+                    </div>
                 </div>
-                <div class="pay">
+            <div class="pay">
                     <div class="pay-m">
                         <div class="charge" onclick="openNewWindow()">
                             <img src="/image/myPage/charge_in.png" width="30px;" height="30px;" alt="충전아이콘">
@@ -224,7 +337,7 @@
             </div>
 
             <div class="attendance">
-                출석 영역
+                <div id="calendar"></div>
             </div>
         </div>
 

@@ -38,9 +38,6 @@ public class SecurityConfig {
     @Autowired
     private UserService userService;
 
-
-
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 

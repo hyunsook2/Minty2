@@ -45,13 +45,15 @@ public class User {
     @Column(nullable = false, name = "gender")
     private String gender;
 
-    // 레벨, 경험치, 잔액 추가
+    // 레벨, 경험치, 잔액 , 포인트 추가
     @Column(nullable = false,name = "level")
     private int level;
     @Column(nullable = false,name = "exp")
     private int exp;
     @Column(nullable = false,name = "balance")
     private int balance;
+    @Column(nullable = false, name = "point")
+    private int point = 0;
 
 
     public User(String name, String email, String ageRange, String mobile,String gender) {
@@ -76,6 +78,7 @@ public class User {
         user.setLevel(1);
         user.setExp(0);
         user.setBalance(0);
+        user.setPoint(0);
         return user;
     }
 }
