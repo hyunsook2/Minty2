@@ -21,10 +21,6 @@ public class MainController {
         return "main";
     }
 
-
-
-
-
     @RequestMapping("/map")
     public String getMap(){
         return "map/map";
