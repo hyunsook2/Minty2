@@ -207,9 +207,7 @@
 </head>
 <body>
 <div layout:fragment="content">
-
   <div class="container">
-
     <div class="profile-area">
       <!-- 프로필 영역 내용 -->
       <div class="profile">
@@ -220,8 +218,8 @@
             <div class="score">3.7</div>
           </div>
           <div class="information">
-            <div class="nickname">Lv.10 닉네임</div>
-            <div class="email">이메일</div>
+            <div class="nickname">Lv. <span th:text="${Lv}"></span> <span th:text="${user.nickName}"></span></div>
+            <div class="email"><span th:text="${user.email}"></span></div>
           </div>
         </div>
         <img src="/image/myPage/exp.PNG" alt="경험치 바">
@@ -232,13 +230,17 @@
           보유 포인트
         </div>
         <div style="text-align: center;">
-          <input style="width: 80%; text-align: center;" placeholder="10,000P" disabled/>
+          <div class="point" style="width: 80%; text-align: center;" >
+            <span th:text="${user.point}"></span>
+          </div>
         </div>
         <div>
           보유 잔고
         </div>
         <div style="text-align: center;">
-          <input style="width: 80%; text-align: center;" placeholder="50,000원" disabled/>
+          <div class="balance" style="width: 80%; text-align: center;" >
+            <span th:text="${user.balance}"></span>
+          </div>
         </div>
         <div class="pay">
           <div class="pay-m">
