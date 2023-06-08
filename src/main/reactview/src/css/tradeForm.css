@@ -1,0 +1,27 @@
+.round-button {
+  border-radius: 50%;
+  background-color: white;
+  color: black;
+  width: 30px;
+  height: 30px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+}
+.photo-div .drag-over {
+  border: 2px dashed blue;
+}
+
+.sortable-item {
+  margin: 10px;
+}
+
+.sortable-item:active {
+  z-index: 2;
+}
+
+.sortable-item:not(:active) {
+  transition: margin 250ms ease;
+}
